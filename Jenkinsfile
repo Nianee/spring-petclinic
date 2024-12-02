@@ -46,6 +46,7 @@ pipeline {
         sh """
         docker rmi jiwoo5657/spring-petclinic:$BUILD_NUMBER
         docker rmi jiwoo5657/spring-petclinic:latest
+        """
       }
     }
     stage('Docker Container') {
@@ -71,4 +72,5 @@ pipeline {
         verbose: false)])
       }
     }
+  }
 }
