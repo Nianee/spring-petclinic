@@ -13,17 +13,5 @@ pipeline {
         git url: 'https://github.com/Nianee/spring-petclinic.git', branch: 'main'
       }
     }
-    stage('Maven Build') {
-      
-    }
-    stage('Docker Image') {
-      
-    }
-    stage('Docker Image Push') {
-    
-    }
-    stage('SSH Publish') {
-    
-    }
   }
 }
