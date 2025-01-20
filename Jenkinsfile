@@ -63,5 +63,18 @@ pipeline {
         """
       }
     }
+    // S3에 Appspec.yml Upload
+    stage('Upload to S3') {
+      steps {
+        echo "Upload to S3"
+        dir("${env.WORKSPACE}") {
+          sh 'zip -r deploy.zip ./deploy Appspec.yml'
+          withAWS(region:"${REGION}", credentials:"${AWS_CREDENTIALS}"){
+            s3Upload(file:"deploy.zip", bucket:"user02-codedeploy-bucket")
+          } 
+          sh 'rm -rf ./deploy.zip'                 
+        }        
+      }
+    }
   }
 }
