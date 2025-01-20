@@ -9,7 +9,7 @@ pipeline {
   // Docker Hub 접속 정보
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerCredential')
-    AWS_CREDENTIALS = credentials('AWSCredential')
+    AWS_CREDENTIALS_NAME = credentials('AWSCredential')
     //GIT_CREDENTIALS = credentials('gitCredential')
     REGION = 'ap-northeast-2'
   }
@@ -69,7 +69,7 @@ pipeline {
         echo "Upload to S3"
         dir("${env.WORKSPACE}") {
           sh 'zip -r deploy.zip ./deploy Appspec.yml'
-          withAWS(region:"${REGION}", credentials:"${AWS_CREDENTIALS}"){
+          withAWS(region:"${REGION}", credentials:"${AWS_CREDENTIALS_NAME}"){
             s3Upload(file:"deploy.zip", bucket:"user02-codedeploy-bucket")
           } 
           sh 'rm -rf ./deploy.zip'                 
