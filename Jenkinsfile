@@ -48,7 +48,7 @@ pipeline {
     stage('Docker Login') {
       steps {
         sh """
-        echo $DOCKERHUB_CREDENTIALS_PSM | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
         docker push jiwoo5657/spring-petclinic:latest
         """
       }
